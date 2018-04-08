@@ -12610,7 +12610,7 @@ Pontuação F1 para o conjunto de teste: 0.6552.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Resposta: </strong>O modelo que escolhi foi o Gradient Boosting. Como os(as) senhores(as) estão investindo em tecnologia e inovação ao contratar um Engenheiro de Machine Learning para o desenvolvimento de um modelo de classificação, pude imaginar que seu interesse é uma solução ótima a longo prazo. Com isso em mente, o Gradient Boosting é o modelo ideal para os(as) senhores(as), dado que, mesmo que ele possua um tempo mais longo de treinamento hoje, no futuro e com mais dados ele obterá resultados muito bons e permitirá melhores tomadas de decisão para com o desempenho dos alunos.</p>
+<p><strong>Resposta: </strong>O modelo que escolhi foi o Gradient Boosting. Como os(as) senhores(as) estão investindo em tecnologia e inovação ao contratar um Engenheiro de Machine Learning para o desenvolvimento de um modelo de classificação, vejo que seu interesse é uma solução ótima hoje e a longo prazo. Com isso em mente, o Gradient Boosting é o modelo ideal para os(as) senhores(as), dado que, mesmo que ele possua um tempo mais longo de treinamento hoje, no futuro e com mais dados ele obterá resultados muito bons e permitirá melhores tomadas de decisão para com o desempenho dos alunos. Além do mais, o tempo necessário para predição é praticamente nulo e esse será o tempo mais considerável com o modelo em produção.</p>
 
 </div>
 </div>
@@ -12661,7 +12661,9 @@ Pontuação F1 para o conjunto de teste: 0.6552.
 <div class="prompt input_prompt">In&nbsp;[123]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Importe &#39;GridSearchCV&#39; e &#39;make_scorer&#39;</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">## Gradient Boosting Tuning</span>
+
+<span class="c1"># TODO: Importe &#39;GridSearchCV&#39; e &#39;make_scorer&#39;</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">fbeta_score</span><span class="p">,</span> <span class="n">make_scorer</span>
 
@@ -12746,6 +12748,45 @@ O modelo calibrado tem F1 de 0.8000 no conjunto de teste.
 </div>
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">## Naive Bayes Tuning</span>
+
+<span class="c1"># TODO: Importe &#39;GridSearchCV&#39; e &#39;make_scorer&#39;</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">fbeta_score</span><span class="p">,</span> <span class="n">make_scorer</span>
+
+<span class="c1"># TODO: Crie a lista de parâmetros que você gostaria de calibrar</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;deviance&#39;</span><span class="p">,</span> <span class="s1">&#39;exponential&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="mo">001</span><span class="p">,</span> <span class="o">.</span><span class="mo">01</span><span class="p">,</span> <span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+    <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># TODO: Inicialize o classificador</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+
+<span class="c1"># TODO: Faça uma função de pontuação f1 utilizando &#39;make_scorer&#39; </span>
+<span class="n">f1_scorer</span> <span class="o">=</span> <span class="n">make_scorer</span><span class="p">(</span><span class="n">fbeta_score</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pos_label</span><span class="o">=</span><span class="s1">&#39;yes&#39;</span><span class="p">)</span>
+
+<span class="c1"># TODO: Execute uma busca em matriz no classificador utilizando o f1_scorer como método de pontuação</span>
+<span class="n">grid_obj</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="n">f1_scorer</span><span class="p">)</span>
+
+<span class="c1"># TODO: Ajuste o objeto de busca em matriz para o treinamento de dados e encontre os parâmetros ótimos</span>
+<span class="n">grid_obj</span> <span class="o">=</span> <span class="n">grid_obj</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">grid_obj</span><span class="o">.</span><span class="n">best_score_</span><span class="p">,</span> <span class="n">grid_obj</span><span class="o">.</span><span class="n">best_params_</span>
+</pre></div>
+
+</div>
 </div>
 </div>
 
